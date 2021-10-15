@@ -20,7 +20,7 @@
     </el-container>
   </el-container>
 </template>
-<script>
+<script lang="ts">
 import sideBar from '@/components/sideBar.vue'
 import tagNav from '@/components/tagNav.vue'
 import { mapState, useStore } from 'vuex'

@@ -3,6 +3,15 @@ import Home from '../views/home.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
+    path: '/',
+    redirect: '/system'
+  },
+  {
+    path: '/system',
+    component: Home,
+    name: '首页'
+  },
+  {
     path: '/menu1',
     component: Home,
     name: '业务中心',
@@ -34,6 +43,11 @@ const routes: Array<RouteRecordRaw> = [
         name: '官网设置'
       }
     ]
+  },
+  {
+    path: '/login',
+    component: () => import('@/views/login.vue'),
+    name: '登录'
   }
 ]
 

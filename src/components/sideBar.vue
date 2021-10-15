@@ -46,9 +46,9 @@ export default {
   },
   computed: {
     activeMenu() {
-      if (this["$store"].state.tagNavMod.activeTab) {
-        console.log(this["$store"].state.tagNavMod.activeTab)
-        return this["$store"].state.tagNavMod.activeTab
+      if (this['$store'].state.tagNavMod.activeTab) {
+        console.log(this['$store'].state.tagNavMod.activeTab)
+        return this['$store'].state.tagNavMod.activeTab
       } else {
         return ''
       }
@@ -56,17 +56,17 @@ export default {
   },
   methods: {
     clickMenu(componentName) {
-      this.openedTab = this["$store"].state.tagNavMod.openedTab
+      this.openedTab = this['$store'].state.tagNavMod.openedTab
       // tabNum 为当前点击的列表项在openedTab中的index，若不存在则为-1
       let tabNum = this.openedTab.indexOf(componentName)
       if (tabNum === -1) {
         // 该标签当前没有打开
         // 将componentName加入到已打开标签页state.openedTab数组中
-        this["$store"].commit('addTab', componentName)
-        this["$store"].commit('changeTab', componentName.path)
+        this['$store'].commit('ADD_TAB', componentName)
+        this['$store'].commit('CHANGE_TAB', componentName.path)
       } else {
         // 该标签是已经打开过的，需要激活此标签页
-        this["$store"].commit('changeTab', componentName.path)
+        this['$store'].commit('CHANGE_TAB', componentName.path)
       }
     }
   }
