@@ -19,7 +19,7 @@
       </el-tab-pane>
     </el-tabs>
     <el-dropdown
-      style="position:absolute;right:10px;top:15px;"
+      style="position:absolute;right:10px;top:12px;"
       @command="handleCommand"
     >
       <span class="el-dropdown-link">
@@ -56,17 +56,26 @@ export default {
     ])
 
     /**
-     * 刷新页面时 router回到首页
+     * 刷新页面时 回到首页
      */
     const router = useRouter()
     router.push('/system')
 
     /**
-     * 关闭标签的按钮功能
+     * 点击标签方法
      */
     const store = useStore()
+    const handleClickTab = tab => {
+      const path = tab.props.name
+      store.commit('CHANGE_TAB', path)
+      router.push(path)
+    }
+
+    /**
+     * 关闭标签的按钮功能
+     */
+
     const handleCommand = e => {
-      // console.log(e)
       switch (e) {
         case '':
           removeTab(editableTabsValue.value)
@@ -122,18 +131,11 @@ export default {
       editableTabsValue,
       openedTab,
       handleCommand,
+      handleClickTab,
       removeTab,
       getOpenedTab,
       changeTab
     }
-  },
-  computed: {
-    // getOpenedTab() {
-    //   return this['$store'].state.tagNavMod.openedTab
-    // },
-    // changeTab() {
-    //   return this['$store'].state.tagNavMod.activeTab
-    // }
   },
   watch: {
     changeTab(val) {
@@ -143,6 +145,7 @@ export default {
       }
     },
     getOpenedTab: {
+      // 监听openedTab实现标签页的新增或删除
       handler(val) {
         if (val.length >= this.openedTab.length) {
           let newTab = val[val.length - 1] // 新增的肯定在数组最后一个
@@ -161,17 +164,7 @@ export default {
       deep: true
     }
   },
-  methods: {
-    handleClickTab(tab) {
-      // const route = {
-      //   path: tab.props.name,
-      //   name: tab.props.label
-      // }
-      const path = tab.props.name
-      this['$store'].commit('CHANGE_TAB', path)
-      this.$router.push(path)
-    }
-  }
+  methods: {}
 }
 </script>
 <style lang="scss">
@@ -180,30 +173,5 @@ export default {
   .elTabs {
     padding-right: 40px;
   }
-}
-.contextmenu {
-  width: 100px;
-  margin: 0;
-  border: 1px solid #ccc;
-  background: #fff;
-  z-index: 3000;
-  position: absolute;
-  list-style-type: none;
-  padding: 5px 0;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
-  box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.2);
-}
-.contextmenu li {
-  margin: 0;
-  padding: 0px 22px;
-}
-.contextmenu li:hover {
-  background: #f2f2f2;
-  cursor: pointer;
-}
-.contextmenu li button {
-  color: #2c3e50;
 }
 </style>
