@@ -1,6 +1,8 @@
 <template>
   <el-container style="height:100%">
-    <el-header><el-link type="primary">primary</el-link></el-header>
+    <el-header style="background:#3E4353">
+      <nav-bar></nav-bar>
+    </el-header>
     <el-container>
       <el-aside>
         <side-bar :list="navList"></side-bar>
@@ -23,12 +25,14 @@
 <script lang="ts">
 import sideBar from '@/components/sideBar.vue'
 import tagNav from '@/components/tagNav.vue'
+import navBar from '@/components/navBar.vue'
 import { mapState, useStore } from 'vuex'
 export default {
   name: 'home',
   components: {
     sideBar,
-    tagNav
+    tagNav,
+    navBar
   },
   setup() {
     const store = useStore()
